@@ -9,7 +9,7 @@ class LoginView {
 	private static $cookiePassword = 'LoginView::CookiePassword';
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
-
+	private static $savedName = '';
 	public function __construct(LoginModel $loginModel){
 		$this->loginModel = $loginModel;
 	}
@@ -21,11 +21,23 @@ class LoginView {
 	 *
 	 * @return  void BUT writes to standard output and cookies!
 	 */
+	 
+	 
 	public function response() {
 		$message = $this->loginModel->responseModel();
 		
-		$response = $this->generateLoginFormHTML($message);
-		//$response .= $this->generateLogoutButtonHTML($message);
+		
+		
+		if($this->loginModel->isLoggedin())
+		{
+			$response = $this->generateLogoutButtonHTML($message);
+		}
+		else
+		{
+			$response = $this->generateLoginFormHTML($message);
+		}
+		
+		
 		return $response;
 	}
 	
@@ -58,7 +70,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . self::$savedName . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -76,6 +88,7 @@ class LoginView {
 		
 		if(isset($_POST[self::$login]))
 		{
+			self::$savedName = $_POST[self::$name];
 			return true;
 		}
 		else
@@ -87,15 +100,18 @@ class LoginView {
 	
 	public function getUsername()
 	{
+		
 		return $_POST[self::$name];
+		
 	}
 	public function getPassword()
 	{
 		return $_POST[self::$password];
 	}
-	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	private function getRequestUserName() {
-		//RETURN REQUEST VARIABLE: USERNAME
-	}
+	
+	
+	
+	
+
 	
 }

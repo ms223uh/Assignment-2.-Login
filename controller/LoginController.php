@@ -7,6 +7,8 @@ class LoginController {
     private $model;
     
     
+    
+    
     public function __construct(LoginView $view, LoginModel $model){
         
         $this->view = $view;
@@ -25,6 +27,11 @@ class LoginController {
         
         
     }
+    
+    
+   
+   
+    
     
     
 }

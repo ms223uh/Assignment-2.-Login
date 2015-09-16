@@ -25,5 +25,5 @@ $lv = new LayoutView();
 $lc = new LoginController($v, $lm);
 
 
-$lv->render(false, $v, $dtv);
+$lv->render($lm->isLoggedin(), $v, $dtv);
 

@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 class LoginModel {
     
     private $name;
@@ -7,23 +7,46 @@ class LoginModel {
     
     private $message;
 
-    
-  //  $userLoggedIn = false;
-    
-    
-    
-    
+    private $loggedIn;
+
     function checkLogin ($inputName, $inputPassword)
     {
-        $name = "Admin";
-        $password = "Password";
+        $this->name = "Admin";
+        $this->password = "Password";
         
-        if($name == $inputName && $password == $inputPassword)
+        var_dump($_SESSION["name"]);
+        
+        $log = false;
+        $this->loggedIn = $log;
+        
+        if(isset($_SESSION["name"]) && isset($_SESSION["password"])){
+            
+            if ($_SESSION["name"] == $this->name && $_SESSION["password"] == $this->password )
+            {
+                
+                
+                unset($_SESSION["name"]);
+                unset($_SESSION["password"]);
+                
+                return $log = true;
+   
+            }
+            
+        }
+        
+        else {
+        
+        if($this->name == $inputName && $this->password == $inputPassword)
         {
         
-      //  $userLoggedIn = true;
+        $_SESSION["name"] = $inputName;
+        $_SESSION["password"] = $inputPassword;
+        
         $message = "Welcome";
-       
+
+        $log = true;
+        $this->loggedIn = $log;
+ 
         }
         
         else if($inputName == "")
@@ -40,6 +63,13 @@ class LoginModel {
             
         }
         
+        else if($this->name == $inputName && $inputPassword == "")
+        {
+            
+            $message = "Admin";
+            
+        }
+        
         else
         {
             $message = "Wrong name or password";
@@ -49,10 +79,18 @@ class LoginModel {
         
     } 
     
+    
+    }
+    
     public function responseModel(){
         
         return $this->message;
         
+    }
+    
+    public function isLoggedin()
+    {
+        return $this->loggedIn;
     }
     
 }
