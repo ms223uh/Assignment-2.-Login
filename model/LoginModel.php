@@ -14,28 +14,37 @@ class LoginModel {
         $this->name = "Admin";
         $this->password = "Password";
         
-       
         
         $log = false;
         $this->loggedIn = $log;
+
+        if(isset($_SESSION["name"]) && isset($_SESSION["password"])){
+            
+            if ($_SESSION["name"] == $this->name && $_SESSION["password"] == $this->password )
+            {
+                
+                
+                unset($_SESSION["name"]);
+                unset($_SESSION["password"]);
+                
+                return $log = true;
+   
+            }
+            
+        }
         
-        
+        else {
         
         if($this->name == $inputName && $this->password == $inputPassword)
         {
-            if(isset($_SESSION["name"]) && isset($_SESSION["password"])){
         
-                unset($_SESSION["name"]);
-                unset($_SESSION["password"]);
-            }
+            $_SESSION["name"] = $inputName;
+            $_SESSION["password"] = $inputPassword;
             
-        $_SESSION["name"] = $inputName;
-        $_SESSION["password"] = $inputPassword;
-        
-        $message = "Welcome";
-
-        $log = true;
-        $this->loggedIn = $log;
+            $message = "Welcome";
+    
+            $log = true;
+            $this->loggedIn = $log;
  
         }
         
@@ -66,8 +75,8 @@ class LoginModel {
         }
         
         $this->message = $message;
-        
-     
+
+    } 
     
     
     }
@@ -98,7 +107,5 @@ class LoginModel {
         
         
     }
-    
-   
     
 }
