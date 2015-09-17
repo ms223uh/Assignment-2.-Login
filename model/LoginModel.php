@@ -14,31 +14,21 @@ class LoginModel {
         $this->name = "Admin";
         $this->password = "Password";
         
-        var_dump($_SESSION["name"]);
+       
         
         $log = false;
         $this->loggedIn = $log;
         
-        if(isset($_SESSION["name"]) && isset($_SESSION["password"])){
-            
-            if ($_SESSION["name"] == $this->name && $_SESSION["password"] == $this->password )
-            {
-                
-                
-                unset($_SESSION["name"]);
-                unset($_SESSION["password"]);
-                
-                return $log = true;
-   
-            }
-            
-        }
         
-        else {
         
         if($this->name == $inputName && $this->password == $inputPassword)
         {
+            if(isset($_SESSION["name"]) && isset($_SESSION["password"])){
         
+                unset($_SESSION["name"]);
+                unset($_SESSION["password"]);
+            }
+            
         $_SESSION["name"] = $inputName;
         $_SESSION["password"] = $inputPassword;
         
@@ -77,7 +67,7 @@ class LoginModel {
         
         $this->message = $message;
         
-    } 
+     
     
     
     }
@@ -90,7 +80,25 @@ class LoginModel {
     
     public function isLoggedin()
     {
-        return $this->loggedIn;
+        if(isset($_SESSION["name"]) && isset($_SESSION["password"]))
+        {
+            return $this->loggedIn = true;
+        }
+        else 
+        {
+            return $this->loggedIn = false;
+        }
     }
+    
+    public function logout(){
+        unset($_SESSION["name"]);
+        unset($_SESSION["password"]);
+        $this->message = 'Bye bye!';
+        
+        
+        
+    }
+    
+   
     
 }

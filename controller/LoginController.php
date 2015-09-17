@@ -20,8 +20,11 @@ class LoginController {
         
         if($this->view->isPosted()) {
         
-        $this->model->checkLogin($this->view->getUsername(), $this->view->getPassword());
+            $this->model->checkLogin($this->view->getUsername(), $this->view->getPassword());
       
+        }
+        if($this->view->logout()){
+            $this->model->logout();
         }
         
         

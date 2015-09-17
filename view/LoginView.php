@@ -35,6 +35,7 @@ class LoginView {
 		else
 		{
 			$response = $this->generateLoginFormHTML($message);
+			
 		}
 		
 		
@@ -96,6 +97,15 @@ class LoginView {
 			return false;
 		}
 		
+	}
+	
+	public function logout(){
+		if(isset($_POST[self::$logout])){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 	public function getUsername()
