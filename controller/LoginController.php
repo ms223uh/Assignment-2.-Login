@@ -25,6 +25,7 @@ class LoginController {
         }
         if($this->view->logout()){
             $this->model->logout();
+            
         }
         
         

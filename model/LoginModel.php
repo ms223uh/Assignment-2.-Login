@@ -96,11 +96,12 @@ class LoginModel {
     }
     
     public function logout(){
+        if(isset($_SESSION["name"]) && isset($_SESSION["password"])){
+        $this->message = "Bye bye!";
+        }
+        
         unset($_SESSION["name"]);
         unset($_SESSION["password"]);
-        $this->message = 'Bye bye!';
-        
-        
         
     }
     

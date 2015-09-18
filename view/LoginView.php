@@ -35,6 +35,9 @@ class LoginView {
 		else
 		{
 			$response = $this->generateLoginFormHTML($message);
+			
+			
+			
 		}
 		
 		
