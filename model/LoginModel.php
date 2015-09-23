@@ -20,16 +20,16 @@ class LoginModel {
 
         
         
-        
-        
         if($this->name == $inputName && $this->password == $inputPassword)
         {
             
+             $message = "Welcome";
             
             if(isset($_SESSION["name"]) && isset($_SESSION["password"])){
 
                 unset($_SESSION["name"]);
                 unset($_SESSION["password"]);
+                $message = "";
 
         }
             
@@ -37,7 +37,7 @@ class LoginModel {
             $_SESSION["name"] = $inputName;
             $_SESSION["password"] = $inputPassword;
             
-            $message = "Welcome";
+           
     
             $log = true;
             $this->loggedIn = $log;

@@ -9,7 +9,8 @@ class DateTimeView {
 
 		$dt = getdate();
 		$dt2 = date("H:m:s");
- 		$showDate = "$dt[weekday], the $dt[mday]th of $dt[month] $dt[year], The time is $dt2";
+		$dt3 = date("jS");
+ 		$showDate = "$dt[weekday], the $dt3 of $dt[month] $dt[year], The time is $dt2";
 
 		$timeString = 'TODO, Write servertime here...';
 
